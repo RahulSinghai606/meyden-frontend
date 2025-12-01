@@ -1,5 +1,5 @@
 // API service for Meyden backend communication
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3002';
+const API_BASE_URL = '/api/proxy';
 
 interface ApiResponse<T> {
   data?: T;
@@ -111,7 +111,7 @@ class ApiService {
 
     const queryString = params.toString();
     const endpoint = queryString ? `/api/v1/vendors?${queryString}` : '/api/v1/vendors';
-    
+
     return this.request<{
       vendors: any[];
       pagination: {
@@ -134,10 +134,10 @@ class ApiService {
   async getPopularVendors(limit?: number) {
     const params = new URLSearchParams();
     if (limit) params.append('limit', limit.toString());
-    
+
     const queryString = params.toString();
     const endpoint = queryString ? `/api/v1/vendors/popular/list?${queryString}` : '/api/v1/vendors/popular/list';
-    
+
     return this.request<{
       vendors: any[];
     }>(endpoint);
@@ -183,7 +183,7 @@ class ApiService {
 
     const queryString = queryParams.toString();
     const endpoint = queryString ? `/api/v1/ai-readiness/surveys?${queryString}` : '/api/v1/ai-readiness/surveys';
-    
+
     return this.request<{
       surveys: any[];
       pagination: {

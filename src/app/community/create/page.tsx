@@ -20,7 +20,7 @@ export default function CreatePostPage() {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:3002/api/v1/community/posts', {
+      const res = await fetch('/api/proxy/api/v1/community/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -102,11 +102,10 @@ export default function CreatePostPage() {
                     key={type.value}
                     type="button"
                     onClick={() => setFormData({ ...formData, type: type.value })}
-                    className={`px-4 py-3 rounded-xl font-semibold transition-all ${
-                      formData.type === type.value
+                    className={`px-4 py-3 rounded-xl font-semibold transition-all ${formData.type === type.value
                         ? `bg-gradient-to-r ${type.color} text-white shadow-lg`
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
+                      }`}
                   >
                     {type.label}
                   </button>

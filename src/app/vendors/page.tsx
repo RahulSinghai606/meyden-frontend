@@ -30,7 +30,7 @@ export default function VendorsPage() {
     if (search) params.append('query', search);
     if (city) params.append('city', city);
 
-    const res = await fetch(`http://localhost:3002/api/v1/vendors?${params}`);
+    const res = await fetch(`/api/proxy/api/v1/vendors?${params}`);
     const data = await res.json();
     setVendors(data.vendors);
     setLoading(false);

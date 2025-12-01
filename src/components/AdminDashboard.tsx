@@ -74,10 +74,10 @@ export default function AdminDashboard({ onNavigate }: AdminDashboardProps) {
   // Load dashboard data
   const loadDashboardData = async () => {
     if (!tokens?.accessToken) return;
-    
+
     try {
       setLoading(true);
-      
+
       // Load vendors
       const vendorsResponse = await apiService.getVendors({ limit: 100 });
       if (vendorsResponse.data?.vendors) {
@@ -85,7 +85,7 @@ export default function AdminDashboard({ onNavigate }: AdminDashboardProps) {
       }
 
       // Load pending vendors
-      const pendingResponse = await fetch('http://localhost:3002/api/v1/admin/vendors/pending');
+      const pendingResponse = await fetch('/api/proxy/api/v1/admin/vendors/pending');
       const pendingData = await pendingResponse.json();
       if (pendingData.vendors) {
         setPendingVendors(pendingData.vendors);
@@ -97,7 +97,7 @@ export default function AdminDashboard({ onNavigate }: AdminDashboardProps) {
         // Load all users via admin endpoint if available
         setUsers([usersResponse.data.user]);
       }
-      
+
       // Calculate stats
       if (vendorsResponse.data?.vendors) {
         const vendorStats = {
@@ -193,11 +193,10 @@ export default function AdminDashboard({ onNavigate }: AdminDashboardProps) {
                 <button
                   key={key}
                   onClick={() => setActiveTab(key as any)}
-                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === key
+                  className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === key
                       ? 'border-blue-500 text-blue-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
+                    }`}
                 >
                   <Icon className="w-4 h-4 inline mr-2" />
                   {label}
@@ -438,7 +437,7 @@ export default function AdminDashboard({ onNavigate }: AdminDashboardProps) {
                           <button
                             onClick={async () => {
                               try {
-                                const res = await fetch(`http://localhost:3002/api/v1/admin/vendors/${vendor.id}/approve`, {
+                                const res = await fetch(`/api/proxy/api/v1/admin/vendors/${vendor.id}/approve`, {
                                   method: 'PATCH',
                                   headers: { 'Authorization': `Bearer ${tokens?.accessToken}` }
                                 });
@@ -460,7 +459,7 @@ export default function AdminDashboard({ onNavigate }: AdminDashboardProps) {
                           <button
                             onClick={async () => {
                               try {
-                                const res = await fetch(`http://localhost:3002/api/v1/admin/vendors/${vendor.id}/reject`, {
+                                const res = await fetch(`/api/proxy/api/v1/admin/vendors/${vendor.id}/reject`, {
                                   method: 'PATCH',
                                   headers: { 'Authorization': `Bearer ${tokens?.accessToken}` }
                                 });
@@ -505,7 +504,7 @@ export default function AdminDashboard({ onNavigate }: AdminDashboardProps) {
           </div>
         )}
       </div>
-      
+
       {/* Add Vendor Modal */}
       <AddVendorModal
         isOpen={showAddVendorModal}

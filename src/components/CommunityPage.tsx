@@ -38,7 +38,7 @@ export default function CommunityPage() {
 
   const fetchPosts = async () => {
     try {
-      const res = await fetch(`http://localhost:3002/api/v1/community/posts?status=PUBLISHED`);
+      const res = await fetch(`/api/proxy/api/v1/community/posts?status=PUBLISHED`);
       const data = await res.json();
       setPosts(data.posts || []);
     } catch (error) {
@@ -155,11 +155,10 @@ export default function CommunityPage() {
               <button
                 key={key}
                 onClick={() => setFilter(key)}
-                className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
-                  filter === key
+                className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${filter === key
                     ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+                  }`}
               >
                 <Icon className="w-4 h-4" />
                 {label}

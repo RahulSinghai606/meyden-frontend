@@ -25,7 +25,7 @@ export default function RegisterVendorPage() {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:3002/api/v1/vendors', {
+      const res = await fetch('/api/proxy/api/v1/vendors', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

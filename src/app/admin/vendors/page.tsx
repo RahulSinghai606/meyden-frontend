@@ -25,7 +25,7 @@ export default function AdminVendorsPage() {
 
   const fetchPendingVendors = async () => {
     try {
-      const res = await fetch('http://localhost:3002/api/v1/admin/vendors/pending', {
+      const res = await fetch('/api/proxy/api/v1/admin/vendors/pending', {
         headers: {
           'Authorization': 'Bearer ADMIN_TOKEN' // TODO: Add real auth
         }
@@ -41,7 +41,7 @@ export default function AdminVendorsPage() {
 
   const approveVendor = async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:3002/api/v1/admin/vendors/${id}/approve`, {
+      const res = await fetch(`/api/proxy/api/v1/admin/vendors/${id}/approve`, {
         method: 'PATCH',
         headers: {
           'Authorization': 'Bearer ADMIN_TOKEN'
@@ -61,7 +61,7 @@ export default function AdminVendorsPage() {
 
   const rejectVendor = async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:3002/api/v1/admin/vendors/${id}/reject`, {
+      const res = await fetch(`/api/proxy/api/v1/admin/vendors/${id}/reject`, {
         method: 'PATCH',
         headers: {
           'Authorization': 'Bearer ADMIN_TOKEN'

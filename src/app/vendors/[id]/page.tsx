@@ -44,7 +44,7 @@ export default function VendorDetailPage() {
 
   const fetchVendor = async () => {
     try {
-      const res = await fetch(`http://localhost:3002/api/v1/vendors/${params.id}`);
+      const res = await fetch(`/api/proxy/api/v1/vendors/${params.id}`);
       const data = await res.json();
       setVendor(data.vendor);
     } catch (error) {
