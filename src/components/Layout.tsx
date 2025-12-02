@@ -1,16 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { 
-  Building2, 
-  Brain, 
-  Users, 
-  BarChart3, 
-  Menu, 
-  X, 
-  Globe, 
+import {
+  Building2,
+  Brain,
+  Users,
+  BarChart3,
+  Menu,
+  X,
+  Globe,
   LogOut,
   User,
   ChevronDown
@@ -48,15 +49,14 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-                <Brain className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Meyden
-                </h1>
-                <p className="text-xs text-gray-500">AI Marketplace</p>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="Meyden Logo"
+                width={150}
+                height={50}
+                className="h-10 w-auto object-contain"
+                priority
+              />
             </div>
 
             {/* Desktop Navigation */}
@@ -67,11 +67,10 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
                   <button
                     key={item.id}
                     onClick={() => handleNavigate(item.id)}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
-                      currentPage === item.id
-                        ? 'bg-blue-50 text-blue-600 border border-blue-200'
-                        : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
-                    }`}
+                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${currentPage === item.id
+                      ? 'bg-blue-50 text-blue-600 border border-blue-200'
+                      : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
+                      }`}
                   >
                     <Icon className="w-4 h-4" />
                     <span className="font-medium">{item.label}</span>
@@ -124,7 +123,7 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
                           </p>
                           <p className="text-xs text-gray-500">{user?.email}</p>
                         </div>
-                        
+
                         {user?.role === 'admin' && (
                           <button
                             onClick={() => handleNavigate('admin')}
@@ -134,7 +133,7 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
                             <span>{t('nav.admin')}</span>
                           </button>
                         )}
-                        
+
                         <button
                           onClick={() => handleNavigate('dashboard')}
                           className="w-full flex items-center space-x-3 px-4 py-2 text-left hover:bg-gray-50 transition-colors"
@@ -142,9 +141,9 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
                           <User className="w-4 h-4 text-gray-400" />
                           <span>{t('nav.dashboard')}</span>
                         </button>
-                        
+
                         <div className="border-t border-gray-100 my-1"></div>
-                        
+
                         <button
                           onClick={logout}
                           className="w-full flex items-center space-x-3 px-4 py-2 text-left hover:bg-gray-50 transition-colors text-red-600"
@@ -192,11 +191,10 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
                     <button
                       key={item.id}
                       onClick={() => handleNavigate(item.id)}
-                      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 ${
-                        currentPage === item.id
-                          ? 'bg-blue-50 text-blue-600 border border-blue-200'
-                          : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
-                      }`}
+                      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 ${currentPage === item.id
+                        ? 'bg-blue-50 text-blue-600 border border-blue-200'
+                        : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
+                        }`}
                     >
                       <Icon className="w-5 h-5" />
                       <span className="font-medium">{item.label}</span>
