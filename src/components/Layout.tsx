@@ -48,13 +48,13 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center">
               <Image
                 src="/logo.png"
                 alt="Meyden Logo"
-                width={150}
-                height={50}
-                className="h-10 w-auto object-contain"
+                width={200}
+                height={60}
+                className="h-16 w-auto object-contain"
                 priority
               />
             </div>
@@ -84,7 +84,7 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
               {/* Language Toggle */}
               <button
                 onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
-                className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors border border-blue-200"
+                className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-meydan-blue/10 text-meydan-blue hover:bg-meydan-blue/20 transition-colors border border-meydan-blue/20"
               >
                 <Globe className="w-4 h-4" />
                 <span className="font-medium">{language.toUpperCase()}</span>
@@ -97,7 +97,7 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
                     onClick={() => setUserMenuOpen(!userMenuOpen)}
                     className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 transition-colors"
                   >
-                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-meydan-blue to-meydan-green rounded-full flex items-center justify-center">
                       <User className="w-4 h-4 text-white" />
                     </div>
                     <div className="hidden md:block text-left">
@@ -158,7 +158,7 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
               ) : (
                 <button
                   onClick={() => handleNavigate('login')}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg"
+                  className="bg-gradient-to-r from-meydan-blue to-meydan-green text-white px-6 py-2 rounded-lg font-medium hover:from-meydan-blue/90 hover:to-meydan-green/90 transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                   {t('nav.login')}
                 </button>
@@ -192,8 +192,8 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
                       key={item.id}
                       onClick={() => handleNavigate(item.id)}
                       className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 ${currentPage === item.id
-                        ? 'bg-blue-50 text-blue-600 border border-blue-200'
-                        : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
+                        ? 'bg-meydan-blue/10 text-meydan-blue border border-meydan-blue/20'
+                        : 'text-gray-600 hover:text-meydan-blue hover:bg-gray-50'
                         }`}
                     >
                       <Icon className="w-5 h-5" />
