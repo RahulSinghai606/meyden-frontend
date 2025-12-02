@@ -114,18 +114,18 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
   const filteredVendors = useMemo(() => {
     return vendors.filter(vendor => {
       const matchesSearch = vendor.companyName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           vendor.businessType.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           vendor.services.some(service => service.name.toLowerCase().includes(searchQuery.toLowerCase()));
-      
+        vendor.businessType.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        vendor.services.some(service => service.name.toLowerCase().includes(searchQuery.toLowerCase()));
+
       const matchesIndustry = selectedIndustry === 'all' || vendor.businessType === selectedIndustry;
-      
+
       return matchesSearch && matchesIndustry;
     });
   }, [vendors, searchQuery, selectedIndustry]);
 
   const toggleFavorite = (vendorId: string) => {
-    setFavorites(prev => 
-      prev.includes(vendorId) 
+    setFavorites(prev =>
+      prev.includes(vendorId)
         ? prev.filter(id => id !== vendorId)
         : [...prev, vendorId]
     );
@@ -150,7 +150,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -168,7 +168,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
             </p>
             <button
               onClick={() => window.open('/vendors/register', '_blank')}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 inline-flex items-center space-x-2"
+              className="bg-meydan-gradient text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition-all duration-300 inline-flex items-center space-x-2"
             >
               <Building2 className="w-5 h-5" />
               <span>Register as Vendor</span>
@@ -194,7 +194,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                 placeholder={t('vendors.search')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-meydan-blue focus:border-transparent transition-all"
               />
             </div>
 
@@ -202,7 +202,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
             <select
               value={selectedIndustry}
               onChange={(e) => setSelectedIndustry(e.target.value)}
-              className="px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-meydan-blue focus:border-transparent transition-all"
             >
               <option value="all">All Industries</option>
               {industries.map(industry => (
@@ -216,12 +216,12 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
             <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-100">
               <span className="text-sm text-gray-600">Active filters:</span>
               {searchQuery && (
-                <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                <span className="px-3 py-1 bg-meydan-blue/10 text-meydan-blue rounded-full text-sm">
                   Search: "{searchQuery}"
                 </span>
               )}
               {selectedIndustry !== 'all' && (
-                <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                <span className="px-3 py-1 bg-meydan-green/10 text-meydan-green rounded-full text-sm">
                   Industry: {selectedIndustry}
                 </span>
               )}
@@ -237,7 +237,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
             animate={{ opacity: 1 }}
             className="flex justify-center items-center py-12"
           >
-            <Loader className="w-8 h-8 text-blue-600 animate-spin" />
+            <Loader className="w-8 h-8 text-meydan-blue animate-spin" />
             <span className="ml-2 text-gray-600">Loading vendors...</span>
           </motion.div>
         )}
@@ -290,7 +290,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
               >
                 {/* Header with tier badge */}
                 <div className={`h-2 bg-gradient-to-r ${getTierColor(vendor.averageRating)}`}></div>
-                
+
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div className={`px-3 py-1 rounded-full text-white text-xs font-semibold ${getTierBadgeColor(vendor.averageRating)}`}>
@@ -310,10 +310,10 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                   </div>
 
                   <div className="mb-4">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-meydan-blue transition-colors">
                       {vendor.companyName}
                     </h3>
-                    <p className="text-blue-600 font-medium text-sm mb-2">{vendor.businessType}</p>
+                    <p className="text-meydan-blue font-medium text-sm mb-2">{vendor.businessType}</p>
                     <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
                       {vendor.description}
                     </p>
@@ -325,11 +325,10 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`w-4 h-4 ${
-                            i < Math.floor(vendor.averageRating)
+                          className={`w-4 h-4 ${i < Math.floor(vendor.averageRating)
                               ? 'text-yellow-400 fill-current'
                               : 'text-gray-300'
-                          }`}
+                            }`}
                         />
                       ))}
                     </div>
@@ -375,7 +374,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                   </div>
 
                   {/* Action Button */}
-                  <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center space-x-2">
+                  <button className="w-full bg-meydan-gradient text-white py-3 rounded-xl font-semibold hover:opacity-90 transition-all duration-300 flex items-center justify-center space-x-2">
                     <span>{t('vendors.contact')}</span>
                     <ChevronRight className="w-4 h-4" />
                   </button>
@@ -418,7 +417,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
             >
               {/* Header */}
               <div className={`h-3 bg-gradient-to-r ${getTierColor(selectedVendor.averageRating)}`}></div>
-              
+
               <div className="p-8">
                 <div className="flex justify-between items-start mb-6">
                   <div className="flex items-center space-x-4">
@@ -429,11 +428,10 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`w-5 h-5 ${
-                            i < Math.floor(selectedVendor.averageRating)
+                          className={`w-5 h-5 ${i < Math.floor(selectedVendor.averageRating)
                               ? 'text-yellow-400 fill-current'
                               : 'text-gray-300'
-                          }`}
+                            }`}
                         />
                       ))}
                       <span className="ml-2 font-semibold">{selectedVendor.averageRating}</span>
@@ -452,7 +450,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                   {/* Left Column */}
                   <div>
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">{selectedVendor.companyName}</h1>
-                    <p className="text-xl text-blue-600 font-medium mb-4">{selectedVendor.businessType}</p>
+                    <p className="text-xl text-meydan-blue font-medium mb-4">{selectedVendor.businessType}</p>
                     <p className="text-gray-600 mb-6 leading-relaxed">{selectedVendor.description}</p>
 
                     {/* Services */}
@@ -462,7 +460,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                         {selectedVendor.services.map((service) => (
                           <span
                             key={service.id}
-                            className="px-3 py-2 bg-blue-100 text-blue-800 rounded-lg text-sm font-medium"
+                            className="px-3 py-2 bg-meydan-blue/10 text-meydan-blue rounded-lg text-sm font-medium"
                           >
                             {service.name}
                           </span>
@@ -482,11 +480,10 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                                   {[...Array(5)].map((_, i) => (
                                     <Star
                                       key={i}
-                                      className={`w-4 h-4 ${
-                                        i < review.overallRating
+                                      className={`w-4 h-4 ${i < review.overallRating
                                           ? 'text-yellow-400 fill-current'
                                           : 'text-gray-300'
-                                      }`}
+                                        }`}
                                     />
                                   ))}
                                 </div>
@@ -530,27 +527,27 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                     {/* Contact Information */}
                     <div className="space-y-4">
                       <h3 className="text-lg font-semibold text-gray-900">Contact Information</h3>
-                      
+
                       <a
                         href={`mailto:${selectedVendor.email}`}
-                        className="flex items-center p-4 bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors group"
+                        className="flex items-center p-4 bg-meydan-blue/5 rounded-xl hover:bg-meydan-blue/10 transition-colors group"
                       >
-                        <Mail className="w-5 h-5 text-blue-600 mr-3" />
+                        <Mail className="w-5 h-5 text-meydan-blue mr-3" />
                         <div>
                           <div className="font-medium text-gray-900">Email</div>
-                          <div className="text-blue-600 group-hover:text-blue-700">{selectedVendor.email}</div>
+                          <div className="text-meydan-blue group-hover:text-meydan-blue/80">{selectedVendor.email}</div>
                         </div>
                       </a>
 
                       {selectedVendor.phone && (
                         <a
                           href={`tel:${selectedVendor.phone}`}
-                          className="flex items-center p-4 bg-green-50 rounded-xl hover:bg-green-100 transition-colors group"
+                          className="flex items-center p-4 bg-meydan-green/5 rounded-xl hover:bg-meydan-green/10 transition-colors group"
                         >
-                          <Phone className="w-5 h-5 text-green-600 mr-3" />
+                          <Phone className="w-5 h-5 text-meydan-green mr-3" />
                           <div>
                             <div className="font-medium text-gray-900">Phone</div>
-                            <div className="text-green-600 group-hover:text-green-700">{selectedVendor.phone}</div>
+                            <div className="text-meydan-green group-hover:text-meydan-green/80">{selectedVendor.phone}</div>
                           </div>
                         </a>
                       )}
@@ -560,12 +557,12 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                           href={`https://${selectedVendor.website}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors group"
+                          className="flex items-center p-4 bg-meydan-cyan/5 rounded-xl hover:bg-meydan-cyan/10 transition-colors group"
                         >
-                          <ExternalLink className="w-5 h-5 text-purple-600 mr-3" />
+                          <ExternalLink className="w-5 h-5 text-meydan-cyan mr-3" />
                           <div>
                             <div className="font-medium text-gray-900">Website</div>
-                            <div className="text-purple-600 group-hover:text-purple-700">{selectedVendor.website}</div>
+                            <div className="text-meydan-cyan group-hover:text-meydan-cyan/80">{selectedVendor.website}</div>
                           </div>
                         </a>
                       )}
@@ -573,7 +570,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
 
                     {/* Action Buttons */}
                     <div className="mt-6 space-y-3">
-                      <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300">
+                      <button className="w-full bg-meydan-gradient text-white py-3 rounded-xl font-semibold hover:opacity-90 transition-all duration-300">
                         {t('vendors.contact')}
                       </button>
                       {selectedVendor.website && (
