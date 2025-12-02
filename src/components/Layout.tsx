@@ -97,7 +97,7 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
                     onClick={() => setUserMenuOpen(!userMenuOpen)}
                     className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 transition-colors"
                   >
-                    <div className="w-8 h-8 bg-gradient-to-br from-meydan-blue to-meydan-green rounded-full flex items-center justify-center">
+                    <div className="w-8 h-8 bg-meydan-gradient rounded-full flex items-center justify-center">
                       <User className="w-4 h-4 text-white" />
                     </div>
                     <div className="hidden md:block text-left">
@@ -158,7 +158,7 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
               ) : (
                 <button
                   onClick={() => handleNavigate('login')}
-                  className="bg-gradient-to-r from-meydan-blue to-meydan-green text-white px-6 py-2 rounded-lg font-medium hover:from-meydan-blue/90 hover:to-meydan-green/90 transition-all duration-200 shadow-md hover:shadow-lg"
+                  className="bg-meydan-gradient text-white px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                   {t('nav.login')}
                 </button>
