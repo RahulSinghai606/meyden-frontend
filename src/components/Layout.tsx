@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
+  Home,
   Building2,
   Brain,
   Users,
@@ -31,6 +32,7 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   const navigationItems = [
+    { id: 'home', label: t('nav.home'), icon: Home },
     { id: 'vendors', label: t('nav.vendors'), icon: Building2 },
     { id: 'readiness', label: t('nav.ai-readiness'), icon: Brain },
     { id: 'community', label: t('nav.community'), icon: Users },

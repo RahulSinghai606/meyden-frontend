@@ -4,11 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiService } from '@/services/api';
-import { 
-  Building2, 
-  Brain, 
-  Users, 
-  ArrowRight, 
+import {
+  Building2,
+  Brain,
+  Users,
+  ArrowRight,
   Star,
   CheckCircle,
   TrendingUp,
@@ -44,7 +44,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       setLoading(true);
       setError(null);
       const response = await apiService.getCommunityPosts();
-      
+
       if (response.data?.posts) {
         setCommunityPosts(response.data.posts.slice(0, 3)); // Show only latest 3 posts
       } else {
@@ -62,7 +62,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     const date = new Date(dateString);
     const now = new Date();
     const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-    
+
     if (diffInHours < 1) return 'Just now';
     if (diffInHours < 24) return `${diffInHours} hours ago`;
     const diffInDays = Math.floor(diffInHours / 24);
@@ -123,9 +123,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+      <section className="relative overflow-hidden bg-meydan-gradient">
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-20"></div>
-        
+
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="text-center">
             <motion.div
@@ -134,7 +134,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               transition={{ duration: 0.8 }}
             >
               <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6">
-                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                <span className="bg-meydan-gradient-light bg-clip-text text-transparent">
                   {t('home.title')}
                 </span>
               </h1>
@@ -151,7 +151,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             >
               <button
                 onClick={() => onNavigate('vendors')}
-                className="group bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
+                className="group bg-meydan-gradient text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:opacity-90 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
               >
                 <span className="flex items-center space-x-2">
                   <Building2 className="w-6 h-6" />
@@ -159,7 +159,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
-              
+
               <button
                 onClick={() => onNavigate('readiness')}
                 className="group bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-white/20 transition-all duration-300"
@@ -222,7 +222,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              Why Choose <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Meyden</span>?
+              Why Choose <span className="bg-meydan-gradient bg-clip-text text-transparent">Meyden</span>?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               The most comprehensive AI ecosystem platform in the MENA region
@@ -264,7 +264,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              Latest from Our <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">Community</span>
+              Latest from Our <span className="bg-meydan-gradient bg-clip-text text-transparent">Community</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Stay updated with the latest discussions, insights, and knowledge sharing from our AI community
@@ -311,11 +311,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   onClick={() => onNavigate('community')}
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      post.type === 'QUESTION' 
-                        ? 'bg-blue-100 text-blue-700' 
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${post.type === 'QUESTION'
+                        ? 'bg-blue-100 text-blue-700'
                         : 'bg-green-100 text-green-700'
-                    }`}>
+                      }`}>
                       {post.type}
                     </span>
                     {post.category && (
@@ -324,15 +323,15 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                       </span>
                     )}
                   </div>
-                  
+
                   <h3 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
                     {post.title}
                   </h3>
-                  
+
                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                     {post.content}
                   </p>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
@@ -347,7 +346,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center space-x-3 text-xs text-gray-500">
                       <div className="flex items-center space-x-1">
                         <Eye className="w-3 h-3" />
@@ -377,7 +376,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           >
             <button
               onClick={() => onNavigate('community')}
-              className="bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:from-green-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="bg-meydan-gradient text-white px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               <span className="flex items-center space-x-2">
                 <Users className="w-5 h-5" />
@@ -436,7 +435,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+      <section className="py-20 bg-meydan-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -450,7 +449,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <p className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto">
               Join thousands of organizations already leveraging AI to drive innovation and growth
             </p>
-            
+
             {!isAuthenticated && (
               <button
                 onClick={() => onNavigate('login')}

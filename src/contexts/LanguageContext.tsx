@@ -18,6 +18,7 @@ interface LanguageContextType {
 
 const translations: Translations = {
   // Navigation
+  'nav.home': { en: 'Home', ar: 'الرئيسية' },
   'nav.vendors': { en: 'Vendors', ar: 'البائعون' },
   'nav.ai-readiness': { en: 'AI Readiness', ar: 'جاهزية الذكاء الاصطناعي' },
   'nav.community': { en: 'Community', ar: 'المجتمع' },
@@ -25,14 +26,14 @@ const translations: Translations = {
   'nav.login': { en: 'Login', ar: 'تسجيل الدخول' },
   'nav.logout': { en: 'Logout', ar: 'تسجيل الخروج' },
   'nav.admin': { en: 'Admin Panel', ar: 'لوحة الإدارة' },
-  
+
   // Home
   'home.title': { en: 'Meyden AI Marketplace', ar: 'سوق ميادة للذكاء الاصطناعي' },
   'home.subtitle': { en: 'Discover AI vendors, assess readiness, and connect with the region\'s leading AI ecosystem', ar: 'اكتشف بائعي الذكاء الاصطناعي، وقيّم الجاهزية، وتواصل مع رائدة نظام الذكاء الاصطناعي الإقليمي' },
   'home.cta.explore': { en: 'Explore Vendors', ar: 'استكشف البائعين' },
   'home.cta.readiness': { en: 'Check AI Readiness', ar: 'افحص جاهزية الذكاء الاصطناعي' },
   'home.cta.community': { en: 'Join Community', ar: 'انضم للمجتمع' },
-  
+
   // Authentication
   'auth.title': { en: 'Welcome to Meyden', ar: 'مرحباً بكم في ميادة' },
   'auth.subtitle': { en: 'Sign in to access your AI ecosystem', ar: 'سجل الدخول للوصول إلى نظامك البيئي للذكاء الاصطناعي' },
@@ -41,7 +42,7 @@ const translations: Translations = {
   'auth.demo.admin': { en: 'Demo Admin Account', ar: 'حساب إداري تجريبي' },
   'auth.demo.learner': { en: 'Demo Learner Account', ar: 'حساب متعلم تجريبي' },
   'auth.demo.login': { en: 'Login as {role}', ar: 'تسجيل الدخول ك{role}' },
-  
+
   // Vendors
   'vendors.title': { en: 'AI Vendor Directory', ar: 'دليل بائعي الذكاء الاصطناعي' },
   'vendors.search': { en: 'Search vendors, services, or industries...', ar: 'ابحث عن البائعين أو الخدمات أو الصناعات...' },
@@ -55,7 +56,7 @@ const translations: Translations = {
   'vendors.employees': { en: 'employees', ar: 'موظف' },
   'vendors.contact': { en: 'Contact Vendor', ar: 'تواصل مع البائع' },
   'vendors.website': { en: 'Visit Website', ar: 'زيارة الموقع' },
-  
+
   // AI Readiness
   'readiness.title': { en: 'AI Readiness Assessment', ar: 'تقييم جاهزية الذكاء الاصطناعي' },
   'readiness.subtitle': { en: 'Evaluate your organization\'s AI readiness across three key dimensions', ar: 'قيم جاهزية مؤسستك للذكاء الاصطناعي عبر ثلاثة أبعاد رئيسية' },
@@ -71,7 +72,7 @@ const translations: Translations = {
   'readiness.results': { en: 'Assessment Results', ar: 'نتائج التقييم' },
   'readiness.download': { en: 'Download Report', ar: 'تحميل التقرير' },
   'readiness.retake': { en: 'Retake Assessment', ar: 'إعادة التقييم' },
-  
+
   // Community
   'community.title': { en: 'AI Community Hub', ar: 'مركز مجتمع الذكاء الاصطناعي' },
   'community.subtitle': { en: 'Connect, share, and learn with AI professionals across MENA', ar: 'تصل وتشارك وتتعلم مع محترفي الذكاء الاصطناعي في منطقة الشرق الأوسط وشمال أفريقيا' },
@@ -84,7 +85,7 @@ const translations: Translations = {
   'community.replies': { en: 'replies', ar: 'رد' },
   'community.following': { en: 'Following', ar: 'متابعة' },
   'community.follow': { en: 'Follow', ar: 'متابعة' },
-  
+
   // Admin
   'admin.title': { en: 'Platform Administration', ar: 'إدارة المنصة' },
   'admin.users': { en: 'Total Users', ar: 'إجمالي المستخدمين' },
@@ -92,7 +93,7 @@ const translations: Translations = {
   'admin.surveys': { en: 'Surveys Completed', ar: 'استطلاعات مكتملة' },
   'admin.engagement': { en: 'Community Engagement', ar: 'تفاعل المجتمع' },
   'admin.analytics': { en: 'Analytics Overview', ar: 'نظرة عامة على التحليلات' },
-  
+
   // Common
   'common.loading': { en: 'Loading...', ar: 'جاري التحميل...' },
   'common.error': { en: 'Something went wrong', ar: 'حدث خطأ ما' },
