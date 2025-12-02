@@ -22,6 +22,7 @@ import {
   BookmarkPlus,
   Loader
 } from 'lucide-react';
+import VendorRegistrationModal from './VendorRegistrationModal';
 
 interface Vendor {
   id: string;
@@ -83,6 +84,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchVendors = async () => {
@@ -151,6 +153,10 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <VendorRegistrationModal
+        isOpen={isRegisterModalOpen}
+        onClose={() => setIsRegisterModalOpen(false)}
+      />
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -167,7 +173,7 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
               Discover premium AI vendors across the MENA region with verified credentials and proven expertise
             </p>
             <button
-              onClick={() => window.open('/vendors/register', '_blank')}
+              onClick={() => setIsRegisterModalOpen(true)}
               className="bg-meydan-gradient text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition-all duration-300 inline-flex items-center space-x-2"
             >
               <Building2 className="w-5 h-5" />
@@ -326,8 +332,8 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                         <Star
                           key={i}
                           className={`w-4 h-4 ${i < Math.floor(vendor.averageRating)
-                              ? 'text-yellow-400 fill-current'
-                              : 'text-gray-300'
+                            ? 'text-yellow-400 fill-current'
+                            : 'text-gray-300'
                             }`}
                         />
                       ))}
@@ -429,8 +435,8 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                         <Star
                           key={i}
                           className={`w-5 h-5 ${i < Math.floor(selectedVendor.averageRating)
-                              ? 'text-yellow-400 fill-current'
-                              : 'text-gray-300'
+                            ? 'text-yellow-400 fill-current'
+                            : 'text-gray-300'
                             }`}
                         />
                       ))}
@@ -481,8 +487,8 @@ export default function VendorsPage({ onNavigate }: VendorsPageProps) {
                                     <Star
                                       key={i}
                                       className={`w-4 h-4 ${i < review.overallRating
-                                          ? 'text-yellow-400 fill-current'
-                                          : 'text-gray-300'
+                                        ? 'text-yellow-400 fill-current'
+                                        : 'text-gray-300'
                                         }`}
                                     />
                                   ))}

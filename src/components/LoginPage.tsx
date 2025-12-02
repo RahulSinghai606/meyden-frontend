@@ -5,12 +5,12 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { mockUsers } from '@/data/mockData';
 import { motion } from 'framer-motion';
-import { 
-  Mail, 
-  Lock, 
-  Eye, 
-  EyeOff, 
-  Chrome, 
+import {
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  Chrome,
   ArrowRight,
   Sparkles
 } from 'lucide-react';
@@ -37,7 +37,7 @@ export default function LoginPage({ onNavigate }: LoginPageProps) {
 
     const credentials = demoCredentials[role];
     const result = await login(credentials.email, credentials.password);
-    
+
     if (result.success) {
       onNavigate(role === 'admin' ? 'admin' : 'dashboard');
     } else {
@@ -49,7 +49,7 @@ export default function LoginPage({ onNavigate }: LoginPageProps) {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = await login(email, password);
-    
+
     if (result.success) {
       onNavigate('dashboard');
     } else {
@@ -85,9 +85,9 @@ export default function LoginPage({ onNavigate }: LoginPageProps) {
   return (
     <div className="min-h-screen flex">
       {/* Left Side - Branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-meydan-gradient relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
-        
+
         <div className="relative z-10 flex flex-col justify-center px-12 text-white">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -95,33 +95,33 @@ export default function LoginPage({ onNavigate }: LoginPageProps) {
             transition={{ duration: 0.8 }}
           >
             <div className="flex items-center space-x-4 mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-purple-400 rounded-2xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center">
                 <Sparkles className="w-8 h-8 text-white" />
               </div>
               <div>
                 <h1 className="text-3xl font-bold">Meyden</h1>
-                <p className="text-blue-200">AI Marketplace</p>
+                <p className="text-blue-100">AI Marketplace</p>
               </div>
             </div>
-            
+
             <h2 className="text-5xl font-bold mb-6 leading-tight">
               Welcome to the Future of AI in MENA
             </h2>
             <p className="text-xl text-blue-100 mb-8 leading-relaxed">
               Connect with top AI vendors, assess your organization's readiness, and join a thriving community of AI innovators across the region.
             </p>
-            
+
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-meydan-lime rounded-full"></div>
                 <span className="text-blue-100">Premium AI vendor directory</span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-meydan-cyan rounded-full"></div>
                 <span className="text-blue-100">AI readiness assessment tools</span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-meydan-green rounded-full"></div>
                 <span className="text-blue-100">Professional community network</span>
               </div>
             </div>
@@ -129,8 +129,8 @@ export default function LoginPage({ onNavigate }: LoginPageProps) {
         </div>
 
         {/* Floating elements */}
-        <div className="absolute top-1/4 right-10 w-32 h-32 bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-full blur-xl"></div>
-        <div className="absolute bottom-1/4 left-10 w-24 h-24 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-xl"></div>
+        <div className="absolute top-1/4 right-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+        <div className="absolute bottom-1/4 left-10 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
       </div>
 
       {/* Right Side - Login Form */}
@@ -149,7 +149,7 @@ export default function LoginPage({ onNavigate }: LoginPageProps) {
           {/* Demo Accounts */}
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-100">
             <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-              <Sparkles className="w-5 h-5 text-blue-600 mr-2" />
+              <Sparkles className="w-5 h-5 text-meydan-blue mr-2" />
               {t('auth.demo.accounts')}
             </h3>
             <div className="space-y-3">
@@ -208,7 +208,7 @@ export default function LoginPage({ onNavigate }: LoginPageProps) {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-meydan-blue focus:border-transparent transition-colors"
                   placeholder="Enter your email"
                   required
                 />
@@ -226,7 +226,7 @@ export default function LoginPage({ onNavigate }: LoginPageProps) {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-meydan-blue focus:border-transparent transition-colors"
                   placeholder="Enter your password"
                   required
                 />
@@ -242,7 +242,7 @@ export default function LoginPage({ onNavigate }: LoginPageProps) {
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="w-full bg-meydan-gradient text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Sign In
             </button>
@@ -251,7 +251,7 @@ export default function LoginPage({ onNavigate }: LoginPageProps) {
           <div className="text-center">
             <button
               onClick={() => onNavigate('home')}
-              className="text-blue-600 hover:text-blue-700 font-medium"
+              className="text-meydan-blue hover:text-meydan-blue/80 font-medium"
             >
               ← Back to Home
             </button>
