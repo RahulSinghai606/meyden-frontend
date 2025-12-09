@@ -185,15 +185,25 @@ export default function LoginPage({ onNavigate }: LoginPageProps) {
 
           {/* SSO Buttons */}
           <div className="grid grid-cols-2 gap-4">
-            <button className="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors group">
+            <button
+              onClick={() => {
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://meyden-demo-production.up.railway.app';
+                window.location.href = `${apiUrl}/api/v1/auth/oauth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
+              }}
+              className="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors group"
+            >
               <Chrome className="w-5 h-5 text-gray-600 mr-2" />
               <span className="text-sm font-medium text-gray-700">Google</span>
             </button>
-            <button className="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors group">
+            <button
+              onClick={() => alert('Microsoft SSO coming soon!')}
+              className="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors group"
+            >
               <div className="w-5 h-5 bg-gray-600 rounded mr-2 flex items-center justify-center text-white text-xs font-bold">M</div>
               <span className="text-sm font-medium text-gray-700">Microsoft</span>
             </button>
           </div>
+
 
           {/* Manual Login Form */}
           <form onSubmit={handleLogin} className="space-y-6">
