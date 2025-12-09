@@ -58,8 +58,9 @@ export default function RegisterVendorPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-700">Company Name *</label>
+            <label htmlFor="companyName" className="block text-sm font-medium mb-1 text-gray-700">Company Name *</label>
             <input
+              id="companyName"
               name="companyName"
               value={formData.companyName}
               onChange={handleChange}
@@ -70,8 +71,9 @@ export default function RegisterVendorPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-700">Business Name *</label>
+            <label htmlFor="businessName" className="block text-sm font-medium mb-1 text-gray-700">Business Name *</label>
             <input
+              id="businessName"
               name="businessName"
               value={formData.businessName}
               onChange={handleChange}
@@ -82,8 +84,9 @@ export default function RegisterVendorPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-700">Description * (min 10 chars)</label>
+            <label htmlFor="description" className="block text-sm font-medium mb-1 text-gray-700">Description * (min 10 chars)</label>
             <textarea
+              id="description"
               name="description"
               value={formData.description}
               onChange={handleChange}
@@ -97,8 +100,9 @@ export default function RegisterVendorPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-700">Email *</label>
+              <label htmlFor="email" className="block text-sm font-medium mb-1 text-gray-700">Email *</label>
               <input
+                id="email"
                 type="email"
                 name="email"
                 value={formData.email}
@@ -110,8 +114,9 @@ export default function RegisterVendorPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-700">Phone</label>
+              <label htmlFor="phone" className="block text-sm font-medium mb-1 text-gray-700">Phone</label>
               <input
+                id="phone"
                 type="tel"
                 name="phone"
                 value={formData.phone}
@@ -124,8 +129,9 @@ export default function RegisterVendorPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-700">City</label>
+              <label htmlFor="city" className="block text-sm font-medium mb-1 text-gray-700">City</label>
               <input
+                id="city"
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
@@ -135,8 +141,9 @@ export default function RegisterVendorPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-700">Country</label>
+              <label htmlFor="country" className="block text-sm font-medium mb-1 text-gray-700">Country</label>
               <input
+                id="country"
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
@@ -147,8 +154,9 @@ export default function RegisterVendorPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-700">Business Type *</label>
+            <label htmlFor="businessType" className="block text-sm font-medium mb-1 text-gray-700">Business Type *</label>
             <input
+              id="businessType"
               name="businessType"
               value={formData.businessType}
               onChange={handleChange}
@@ -159,8 +167,9 @@ export default function RegisterVendorPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-700">Website</label>
+            <label htmlFor="website" className="block text-sm font-medium mb-1 text-gray-700">Website</label>
             <input
+              id="website"
               type="url"
               name="website"
               value={formData.website}

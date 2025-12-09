@@ -5,25 +5,23 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiService } from '@/services/api';
 import { SurveyQuestion } from '@/data/mockData';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Brain, 
-  Database, 
-  Shield, 
-  Users, 
-  ChevronLeft, 
-  ChevronRight, 
+import { motion } from 'framer-motion';
+import {
+  Brain,
+  Database,
+  Shield,
+  Users,
+  ChevronLeft,
+  ChevronRight,
   CheckCircle,
   Download,
   RotateCcw,
-  TrendingUp,
-  Award,
-  Target
+  Award
 } from 'lucide-react';
 import jsPDF from 'jspdf';
 
 interface AIReadinessPageProps {
-  onNavigate: (page: string) => void;
+  readonly onNavigate: (page: string) => void;
 }
 
 interface Answer {
@@ -32,13 +30,13 @@ interface Answer {
 }
 
 export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
   const { tokens, isAuthenticated } = useAuth();
   const [currentStep, setCurrentStep] = useState<'intro' | 'survey' | 'results'>('intro');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>([]);
-  const [results, setResults] = useState<{[key: string]: number} | null>(null);
-  
+  const [results, setResults] = useState<{ [key: string]: number } | null>(null);
+
   // API integration state
   const [surveyQuestions, setSurveyQuestions] = useState<SurveyQuestion[]>([]);
   const [surveyId, setSurveyId] = useState<string>('');
@@ -50,14 +48,14 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
     try {
       setLoading(true);
       setError(null);
-      
+
       // Get all surveys using the API service
       const surveysResponse = await apiService.getSurveys({ limit: 10 });
-      
+
       if (surveysResponse.error) {
         throw new Error(surveysResponse.error);
       }
-      
+
       if (!surveysResponse.data?.surveys || surveysResponse.data.surveys.length === 0) {
         throw new Error('No surveys found');
       }
@@ -75,11 +73,11 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
 
       // Get survey with questions using the API service
       const surveyResponse = await apiService.getSurveyById(aiReadinessSurvey.id);
-      
+
       if (surveyResponse.error) {
         throw new Error(surveyResponse.error);
       }
-      
+
       if (!surveyResponse.data?.survey) {
         throw new Error('Survey not found');
       }
@@ -116,24 +114,24 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
   }, [currentStep]);
 
   const dimensions = [
-    { 
-      key: 'Data', 
-      name: t('readiness.data'), 
-      icon: Database, 
+    {
+      key: 'Data',
+      name: t('readiness.data'),
+      icon: Database,
       color: 'from-blue-500 to-cyan-500',
       description: 'Data foundation, quality, and governance'
     },
-    { 
-      key: 'Governance', 
-      name: t('readiness.governance'), 
-      icon: Shield, 
+    {
+      key: 'Governance',
+      name: t('readiness.governance'),
+      icon: Shield,
       color: 'from-purple-500 to-pink-500',
       description: 'AI governance, ethics, and compliance'
     },
-    { 
-      key: 'Adoption', 
-      name: t('readiness.adoption'), 
-      icon: Users, 
+    {
+      key: 'Adoption',
+      name: t('readiness.adoption'),
+      icon: Users,
       color: 'from-green-500 to-emerald-500',
       description: 'Organizational culture and change management'
     }
@@ -164,19 +162,19 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
   };
 
   const calculateResults = async () => {
-    const scores: {[key: string]: number} = {};
-    
-    dimensions.forEach(dim => {
+    const scores: { [key: string]: number } = {};
+
+    for (const dim of dimensions) {
       const dimQuestions = surveyQuestions.filter(q => q.dimension === dim.key);
       const dimAnswers = dimQuestions.map(q => {
         const answer = answers.find(a => a.questionId === q.id);
         return answer ? answer.answer : 0;
       });
-      
+
       // Convert to percentage (0-100)
       const avgScore = dimAnswers.reduce((sum, val) => sum + val, 0) / dimAnswers.length;
       scores[dim.key] = Math.round((avgScore / 3) * 100);
-    });
+    }
 
     setResults(scores);
     setCurrentStep('results');
@@ -191,7 +189,7 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
   };
 
   // Submit survey response to backend
-  const submitSurveyResponse = async (scores: {[key: string]: number}) => {
+  const submitSurveyResponse = async (scores: { [key: string]: number }) => {
     if (!surveyId) return;
 
     // Only submit if user is authenticated and has a valid token
@@ -213,12 +211,12 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
       };
 
       const result = await apiService.submitSurveyResponse(responseData, tokens.accessToken);
-      
+
       if (result.error) {
         console.error('API Error:', result.error);
         throw new Error(result.error);
       }
-      
+
       console.log('Survey submitted successfully:', result.data);
     } catch (error) {
       console.error('Failed to submit survey response:', error);
@@ -250,24 +248,23 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
     doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 20, yPosition);
     yPosition += 20;
 
-    dimensions.forEach(dim => {
-      const IconComponent = dim.icon;
+    for (const dim of dimensions) {
       const score = results[dim.key];
-      
+
       yPosition += 10;
       doc.setFontSize(16);
       doc.text(`${dim.name}: ${score}%`, 20, yPosition);
       yPosition += 10;
-      
+
       doc.setFontSize(12);
       const recommendations = getRecommendations(dim.key, score);
       recommendations.forEach(rec => {
         doc.text(`• ${rec}`, 25, yPosition);
         yPosition += 7;
       });
-      
+
       yPosition += 10;
-    });
+    }
 
     doc.save('meyden-ai-readiness-report.pdf');
   };
@@ -290,7 +287,7 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
         'Foster AI innovation culture across teams'
       ]
     };
-    
+
     return recommendations[dimension as keyof typeof recommendations] || [];
   };
 
@@ -320,7 +317,7 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
             <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-8">
               <Brain className="w-10 h-10 text-white" />
             </div>
-            
+
             <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               {t('readiness.title')}
             </h1>
@@ -461,9 +458,8 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
             className="bg-white rounded-2xl shadow-lg p-8 mb-8"
           >
             <div className="flex items-center mb-6">
-              <div className={`w-12 h-12 bg-gradient-to-r ${
-                dimensions.find(d => d.key === currentQuestion.dimension)?.color || 'from-gray-400 to-gray-500'
-              } rounded-xl flex items-center justify-center mr-4`}>
+              <div className={`w-12 h-12 bg-gradient-to-r ${dimensions.find(d => d.key === currentQuestion.dimension)?.color || 'from-gray-400 to-gray-500'
+                } rounded-xl flex items-center justify-center mr-4`}>
                 {React.createElement(
                   dimensions.find(d => d.key === currentQuestion.dimension)?.icon || Brain,
                   { className: "w-6 h-6 text-white" }
@@ -484,20 +480,18 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
                 <motion.button
                   key={index}
                   onClick={() => handleAnswer(currentQuestion.id, index)}
-                  className={`w-full p-4 rounded-xl text-left border-2 transition-all duration-300 ${
-                    currentAnswer === index
-                      ? 'border-purple-500 bg-purple-50'
-                      : 'border-gray-200 hover:border-purple-300 hover:bg-purple-25'
-                  }`}
+                  className={`w-full p-4 rounded-xl text-left border-2 transition-all duration-300 ${currentAnswer === index
+                    ? 'border-purple-500 bg-purple-50'
+                    : 'border-gray-200 hover:border-purple-300 hover:bg-purple-25'
+                    }`}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <div className="flex items-center">
-                    <div className={`w-6 h-6 rounded-full border-2 mr-4 flex items-center justify-center ${
-                      currentAnswer === index
-                        ? 'border-purple-500 bg-purple-500'
-                        : 'border-gray-300'
-                    }`}>
+                    <div className={`w-6 h-6 rounded-full border-2 mr-4 flex items-center justify-center ${currentAnswer === index
+                      ? 'border-purple-500 bg-purple-500'
+                      : 'border-gray-300'
+                      }`}>
                       {currentAnswer === index && (
                         <CheckCircle className="w-4 h-4 text-white" />
                       )}
@@ -526,7 +520,7 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
               className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span>
-                {currentQuestionIndex === surveyQuestions.length - 1 
+                {currentQuestionIndex === surveyQuestions.length - 1
                   ? t('readiness.complete')
                   : t('readiness.next')}
               </span>
@@ -554,7 +548,7 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
             <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-8">
               <Award className="w-10 h-10 text-white" />
             </div>
-            
+
             <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               {t('readiness.results')}
             </h1>
@@ -579,10 +573,7 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
               <div className="text-2xl font-semibold text-gray-900 mb-2">
                 Overall AI Readiness
               </div>
-              <div className={`inline-block px-4 py-2 rounded-full text-white font-semibold ${
-                overallScore >= 80 ? 'bg-green-500' :
-                overallScore >= 60 ? 'bg-yellow-500' : 'bg-red-500'
-              }`}>
+              <div className={`inline-block px-4 py-2 rounded-full text-white font-semibold ${getScoreColorClass(overallScore)}`}>
                 {getScoreLabel(overallScore)}
               </div>
             </div>
@@ -593,7 +584,7 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
             {dimensions.map((dim, index) => {
               const Icon = dim.icon;
               const score = results[dim.key];
-              
+
               return (
                 <motion.div
                   key={dim.key}
@@ -611,7 +602,7 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
                       <p className="text-sm text-gray-600">{dim.description}</p>
                     </div>
                   </div>
-                  
+
                   <div className="mb-4">
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-gray-600">Score</span>
@@ -627,10 +618,7 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
                     </div>
                   </div>
 
-                  <div className={`text-sm font-medium ${
-                    score >= 80 ? 'text-green-600' :
-                    score >= 60 ? 'text-yellow-600' : 'text-red-600'
-                  }`}>
+                  <div className={`text-sm font-medium ${getScoreTextColorClass(score)}`}>
                     {getScoreLabel(score)}
                   </div>
                 </motion.div>
@@ -652,7 +640,7 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
               <Download className="w-5 h-5" />
               <span>{t('readiness.download')}</span>
             </button>
-            
+
             <button
               onClick={resetAssessment}
               className="flex items-center justify-center space-x-2 border border-gray-300 text-gray-700 px-8 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors"
@@ -667,4 +655,16 @@ export default function AIReadinessPage({ onNavigate }: AIReadinessPageProps) {
   }
 
   return null;
+}
+
+function getScoreColorClass(score: number): string {
+  if (score >= 80) return 'bg-green-500';
+  if (score >= 60) return 'bg-yellow-500';
+  return 'bg-red-500';
+}
+
+function getScoreTextColorClass(score: number): string {
+  if (score >= 80) return 'text-green-600';
+  if (score >= 60) return 'text-yellow-600';
+  return 'text-red-600';
 }

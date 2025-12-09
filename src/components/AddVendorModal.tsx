@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiService } from '@/services/api';
 import { motion } from 'framer-motion';
-import { X, Building2, Mail, Phone, MapPin, Globe, User } from 'lucide-react';
+import { X, Building2, Phone, MapPin, User } from 'lucide-react';
 
 interface AddVendorModalProps {
   isOpen: boolean;
@@ -79,7 +79,7 @@ export default function AddVendorModal({ isOpen, onClose, onSuccess }: AddVendor
       // Step 2: Create vendor profile (this would need to be implemented in the backend)
       // For now, we'll simulate success
       console.log('User created:', userResult.data);
-      
+
       // Simulate vendor profile creation
       await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -149,7 +149,7 @@ export default function AddVendorModal({ isOpen, onClose, onSuccess }: AddVendor
               <User className="w-5 h-5 mr-2" />
               Contact Information
             </h3>
-            
+
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -164,7 +164,7 @@ export default function AddVendorModal({ isOpen, onClose, onSuccess }: AddVendor
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Last Name *
@@ -216,7 +216,7 @@ export default function AddVendorModal({ isOpen, onClose, onSuccess }: AddVendor
               <Building2 className="w-5 h-5 mr-2" />
               Company Information
             </h3>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Company Name *
@@ -307,7 +307,7 @@ export default function AddVendorModal({ isOpen, onClose, onSuccess }: AddVendor
               <Phone className="w-5 h-5 mr-2" />
               Contact Details
             </h3>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Phone Number
@@ -342,7 +342,7 @@ export default function AddVendorModal({ isOpen, onClose, onSuccess }: AddVendor
               <MapPin className="w-5 h-5 mr-2" />
               Address Information
             </h3>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Street Address

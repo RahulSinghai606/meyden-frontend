@@ -68,9 +68,9 @@ export default function App() {
   );
 }
 
-function RoleBasedDashboard({ onNavigate }: { onNavigate: (page: string) => void }) {
+function RoleBasedDashboard({ onNavigate }: { readonly onNavigate: (page: string) => void }) {
   const { user } = useAuth();
-  
+
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 to-pink-50">
@@ -100,9 +100,9 @@ function RoleBasedDashboard({ onNavigate }: { onNavigate: (page: string) => void
   }
 }
 
-function UserDashboard({ onNavigate }: { onNavigate: (page: string) => void }) {
+function UserDashboard({ onNavigate }: { readonly onNavigate: (page: string) => void }) {
   const { user } = useAuth();
-  
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -111,7 +111,7 @@ function UserDashboard({ onNavigate }: { onNavigate: (page: string) => void }) {
             Welcome, {user?.firstName}!
           </h1>
           <p className="text-xl text-gray-600 mb-8">Your personalized dashboard</p>
-          
+
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">AI Readiness Assessment</h3>
@@ -123,7 +123,7 @@ function UserDashboard({ onNavigate }: { onNavigate: (page: string) => void }) {
                 Start Assessment
               </button>
             </div>
-            
+
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Browse Vendors</h3>
               <p className="text-gray-600 mb-4">Find AI service providers and consultants</p>
@@ -135,7 +135,7 @@ function UserDashboard({ onNavigate }: { onNavigate: (page: string) => void }) {
               </button>
             </div>
           </div>
-          
+
           <button
             onClick={() => onNavigate('home')}
             className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors"
